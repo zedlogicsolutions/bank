@@ -1,0 +1,95 @@
+.main{
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.head{
+    position: absolute;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    width: 100%;
+    top: 0;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+}
+.slogon{
+    position: relative;
+    top: 18px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    padding: 5px;
+    width: 500px;
+    height: 200px;
+    border: 2px solid transparent;
+    box-shadow: 1px 2px 2px 1px #3B82F6;
+    margin: 0 auto;
+    gap: 10px;
+}
+.mb-4{
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: rgb(47, 51, 79);
+    margin-bottom: 2px;
+}
+.border{
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+}
+.select-1{
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+}
+.gbutton{
+    background-color: #f94949;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+  .print-token {
+    visibility: visible !important;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 300px;
+    font-size: 16px;
+    background: white !important;
+    padding: 16px;
+    border: 1px solid #000;
+  }
+.grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 8px;
+    border: 1px dotted #ccc;
+    border-radius: 10px;
+    padding-left: 10px;
+
+}
+.livetoken{
+    background-color: white;              /* bg-white */
+    border-radius: 0.75rem;               /* rounded-xl */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
+    padding: 1rem;                        
+    border-left: 4px solid #3B82F6;       
+    transition: box-shadow 0.2s ease;
+}
+.livetoken:hover {
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15); /* hover:shadow-lg */
+}
