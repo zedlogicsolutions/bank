@@ -1,0 +1,26 @@
+/* nav.css or inside your component's CSS */
+.nav {
+  height: 100vh;
+  width: 220px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #1f2937; /* dark gray */
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+.nav a {
+  padding: 15px 20px;
+  text-decoration: none;
+  font-size: 16px;
+  color: #e5e7eb; /* light gray text */
+  transition: background 0.3s ease;
+}
+
+.nav a:hover {
+  background-color: #374151; /* slightly lighter gray */
+  color: #fff;
+  padding-left: 25px;
+}

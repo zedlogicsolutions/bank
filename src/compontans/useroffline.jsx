@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import './user.css';
 
 
-
 const services = ['Deposit', 'Withdraw', 'Account Service', 'Loan', 'Customer Service', 'ATM'];
 
 let tokenCounter = 1;

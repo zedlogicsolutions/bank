@@ -1,6 +1,7 @@
 // src/components/AdminPanel.jsx
 import React, { useState, useEffect } from 'react';
 import './adminpanel.css';
+import Useroffline from './useroffline';
 
 const services = ['Deposit', 'Withdraw', 'Account Service', 'Loan', 'Customer Service', 'ATM'];
 
@@ -27,6 +28,11 @@ const AdminPanel = () => {
     });
     setQueueData(data);
   };
+  
+  const getLiveToken = (service) => {
+  return queues[service][0] ? queues[service][0].token : 'None';
+};
+
 
   useEffect(() => {
     refreshQueue();
@@ -41,37 +47,53 @@ const AdminPanel = () => {
       queues[service].push(current);
     }
     refreshQueue();
-  };
-  
-
+  }; 
   return (
-    <div className="admin-panel">
-      <h1>👩‍💼 Admin Queue Management</h1>
-      {services.map(service => {
-        const data = queueData[service] || { live: null, waiting: [], out: [] };
-        return (
-          <div key={service} className="admin-card">
-            <h2>{service}</h2>
-            <p><strong>Live:</strong> {data.live ? `${data.live.token} (${data.live.phone})` : 'None'}</p>
-            <button onClick={() => callNext(service)} className="btn-next">⏭️ Call Next</button>
-
-            <p className="section-title">🕒 Waiting</p>
-            <ul>
-              {data.waiting.length ? data.waiting.map((q, idx) => (
-                <li key={idx}>{q.token} - {q.phone}</li>
-              )) : <li>No one waiting</li>}
-            </ul>
-
-            <p className="section-title">✅ Served (Out)</p>
-            <ul className="text-muted">
-              {data.out.length ? data.out.map((q, idx) => (
-                <li key={idx}>{q.token} - {q.phone}</li>
-              )) : <li>No one served yet</li>}
-            </ul>
-          </div>
-        );
-      })}
-    </div>
+         <div className="admin-panel">
+        <h1>👩‍💼 Admin Queue Management</h1>
+        
+        {services.map(s => {
+          const live = getLiveToken(s);
+          const data = queueData[s] || { live: null, waiting: [], out: [] };
+        
+          return (
+            <div key={s} className="admin-card">
+              <h2>{s}</h2>
+          
+              <p>
+                <strong>Live:</strong> {live}{' '}
+                {data.live ? `(${data.live.token} - ${data.live.phone})` : '(None)'}
+              </p>
+          
+              <button onClick={() => callNext(s)} className="btn-next">
+                ⏭️ Call Next
+              </button>
+          
+              <p className="section-title">🕒 Waiting</p>
+              <ul>
+                {data.waiting.length ? (
+                  data.waiting.map((q, idx) => (
+                    <li key={idx}>{q.token} - {q.phone}</li>
+                  ))
+                ) : (
+                  <li>No one waiting</li>
+                )}
+              </ul>
+              
+              <p className="section-title">✅ Served (Out)</p>
+              <ul className="text-muted">
+                {data.out.length ? (
+                  data.out.map((q, idx) => (
+                    <li key={idx}>{q.token} - {q.phone}</li>
+                  ))
+                ) : (
+                  <li>No one served yet</li>
+                )}
+              </ul>
+            </div>
+          );
+        })}
+      </div>
   );
 };
 

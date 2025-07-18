@@ -1,0 +1,53 @@
+.section {
+  margin-left: 200px;
+  width: 80%;
+  padding: 30px;
+  background-color: #f4f7fa;
+  min-height: 100vh;
+  overflow: hidden;
+}
+.counter-container {
+  padding: 20px;
+  background: #f9fbfc;
+}
+
+.counter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.counter-card {
+  background: white;
+  border-left: 6px solid #007bff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.serve-btn {
+  background: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+
+.serve-btn:hover {
+  background: #0056b3;
+}
+
+.queue-section {
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+.history {
+  margin-top: 40px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}

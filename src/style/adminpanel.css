@@ -1,0 +1,34 @@
+.dashboard {
+  display: flex;
+  height: 100vh;
+  font-family: sans-serif;
+}
+
+.sidebar {
+  width: 220px;
+  background: #1e293b;
+  color: white;
+  padding: 20px;
+}
+
+.sidebar-title {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.sidebar-item {
+  margin: 10px 0;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.sidebar-item:hover {
+  background-color: #334155;
+}
+
+.dashboard-content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
