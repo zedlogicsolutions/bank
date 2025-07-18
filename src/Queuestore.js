@@ -1,53 +1,74 @@
-const services = ['Deposit', 'Withdraw', 'Account Service', 'Loan', 'Customer Service', 'ATM'];
+// src/context/queuestore.js
+import React, { createContext, useContext, useState } from 'react';
+
+const QueueContext = createContext();
+
+export const useQueue = () => useContext(QueueContext);
+
+const servicesList = [
+  'Deposit',
+  'Withdraw',
+  'Account Service',
+  'Loan',
+  'Customer Service',
+  'ATM'
+];
+
+// Helper to create initial queue object
+const createInitialQueues = () => {
+  const obj = {};
+  servicesList.forEach(service => (obj[service] = []));
+  return obj;
+};
 
 let tokenCounter = 1;
 
-const queues = {};
-services.forEach(service => {
-  queues[service] = [];
-});
+export const QueueProvider = ({ children }) => {
+  const [queues, setQueues] = useState(createInitialQueues());
+  const [inService, setInService] = useState({});
+  const [log, setLog] = useState([]);
 
-// Reset daily
-const lastResetKey = 'ktvm_last_reset';
-const today = new Date().toLocaleDateString();
+  const addToken = (service, phone) => {
+    const token = `${service.charAt(0)}${String(tokenCounter++).padStart(3, '0')}`;
+    const entry = { token, phone };
 
-if (localStorage.getItem(lastResetKey) !== today) {
-  services.forEach(service => queues[service] = []);
-  tokenCounter = 1;
-  localStorage.setItem(lastResetKey, today);
-}
+    setQueues(prev => ({
+      ...prev,
+      [service]: [...prev[service], entry]
+    }));
+  };
 
-const addToken = (service, phone, isPremium = false, time = '') => {
-  const prefix = service.charAt(0).toUpperCase();
-  const token = `${prefix}${String(tokenCounter).padStart(3, '0')}`;
-  tokenCounter++;
+  const serveNext = (service) => {
+    const queue = queues[service];
+    if (!queue || queue.length === 0) {
+      setInService(prev => ({ ...prev, [service]: null }));
+      return;
+    }
 
-  const entry = { token, phone, isPremium, time };
-  if (isPremium) {
-    queues[service].unshift(entry);
-  } else {
-    queues[service].push(entry);
-  }
+    const [next, ...rest] = queue;
+    setQueues(prev => ({ ...prev, [service]: rest }));
+    setInService(prev => ({ ...prev, [service]: next }));
+    setLog(prev => [...prev, { service, ...next, time: new Date().toLocaleTimeString() }]);
+  };
 
-  return entry;
-};
+  const getWaitingTime = (service) => {
+    const count = queues[service].length;
+    return count === 0 ? 'Now' : `${count * 10} min(s)`;
+  };
 
-const getLiveToken = (service) => queues[service][0]?.token || 'None';
-
-const getWaitingCount = (service) => {
-  return queues[service].length > 0 ? queues[service].length - 1 : 0;
-};
-
-const getWaitingTime = (service, token) => {
-  const index = queues[service].findIndex(t => t.token === token);
-  return index > 0 ? `${index * 10} mins` : 'Now';
-};
-
-export {
-  services,
-  queues,
-  addToken,
-  getLiveToken,
-  getWaitingCount,
-  getWaitingTime
+  return (
+    <QueueContext.Provider
+      value={{
+        services: servicesList,
+        queues,
+        inService,
+        log,
+        addToken,
+        serveNext,
+        getWaitingTime
+      }}
+    >
+      {children}
+    </QueueContext.Provider>
+  );
 };

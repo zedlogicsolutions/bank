@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import './user.css';
 
@@ -28,8 +28,8 @@ if (localStorage.getItem(lastResetKey) !== today) {
 const App = () => {
   const [phone, setPhone] = useState('');
   const [service, setService] = useState(services[0]);
-  const [isPremium, setIsPremium] = useState(false);
-  const [bookingTime, setBookingTime] = useState('');
+  const [isPremium] = useState(false);
+  const [bookingTime] = useState('');
   const [generatedToken, setGeneratedToken] = useState(null);
   const [showToken, setShowToken] = useState(false);
 

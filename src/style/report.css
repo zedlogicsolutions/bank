@@ -1,0 +1,64 @@
+.report-container {
+  padding: 2rem;
+  background-color: #f5f9fc;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+}
+
+.report-container h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #1e5aa8;
+  text-align: center;
+}
+
+.report-container h2 {
+  font-size: 1.4rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #34495e;
+}
+
+.report-container h3 {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  color: #2c3e50;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+}
+
+.daily-log {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.daily-log ul,
+.report-container ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.report-container ul li {
+  background-color: #ecf3f9;
+  margin-bottom: 6px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.04);
+  transition: background 0.2s ease;
+}
+
+.report-container ul li:hover {
+  background-color: #d9ebf9;
+}
+
+.bar-chart {
+  margin-top: 1rem;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
