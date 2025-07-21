@@ -33,8 +33,28 @@ const App = () => {
   const [bookingTime, setBookingTime] = useState('');
   const [generatedToken, setGeneratedToken] = useState(null);
   const [showToken, setShowToken] = useState(false);
+  const [liveQueues, setLiveQueues] = useState({});
 
-  const handleSubmit = () => {
+    useEffect(() => {
+    const interval = setInterval(() => {
+      fetch('http://localhost:5000/queues')
+        .then(res => res.json())
+        .then(setLiveQueues);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleSubmit = async () => {
+     const res = await fetch('http://localhost:5000/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ phone, service })
+    });
+
+    const data = await res.json();
+    setGeneratedToken(data);
+    setShowToken(true);
+
     const prefix = service.charAt(0).toUpperCase();
     const token = `${prefix}${String(tokenCounter).padStart(3, '0')}`;
     tokenCounter++;
